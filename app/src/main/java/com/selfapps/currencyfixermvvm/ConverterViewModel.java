@@ -5,7 +5,8 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.util.Log;
 
-import com.selfapps.currencyfixermvvm.entity.FullCurrency;
+import com.selfapps.currencyfixermvvm.data.FixerRepository;
+import com.selfapps.currencyfixermvvm.data.entity.FullCurrency;
 
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.selfapps.currencyfixermvvm.entity.FullCurrency;
+import com.selfapps.currencyfixermvvm.data.entity.FullCurrency;
 
 public class ConverterFragment extends Fragment {
 

@@ -1,4 +1,4 @@
-package com.selfapps.currencyfixermvvm.entity;
+package com.selfapps.currencyfixermvvm.data.entity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
