@@ -35,4 +35,24 @@ public class ConverterViewModel extends ViewModel {
          });
          return fullCurrencyLiveData;
     }
- }
+
+    public LiveData<FullCurrency> getDefinitions(){
+        FixerRepository.getAPI().getLatest().enqueue(new Callback<FullCurrency>() {
+            @Override
+            public void onResponse(Call<FullCurrency> call, Response<FullCurrency> response) {
+                if(response != null){
+                    Log.d("TAG", "GET_LATEST response: "+response.raw());
+                    Log.d("TAG", "GET_LATEST body: "+response.body());
+                    fullCurrencyLiveData.postValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FullCurrency> call, Throwable t) {
+                Log.d("TAG", "GET_LATEST error "+t.getMessage());
+            }
+        });
+        return fullCurrencyLiveData;
+    }
+
+}

@@ -11,6 +11,9 @@ public interface FixerService {
     @GET("latest")
     Call<FullCurrency> getLatest();
 
+    @GET("symbols")
+    Call<FullCurrency> getDefinitions();
+
 //    @GET("group/{id}/users")
 //    Call<List<User>> groupList(@Path("id") int groupId);
 }
