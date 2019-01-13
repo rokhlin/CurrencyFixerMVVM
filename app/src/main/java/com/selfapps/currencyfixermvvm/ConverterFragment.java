@@ -21,6 +21,8 @@ import android.widget.TextView;
 
 import com.selfapps.currencyfixermvvm.data.entity.FullCurrency;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -104,11 +106,14 @@ public class ConverterFragment extends Fragment {
     }
 
     private void calculateUpdates() {
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.CEILING);
         double amount = Double.parseDouble(String.valueOf(exchangeValue.getText()));
-        double exchangeRateFrom = fullCurrency.getValue().rates.get(spFrom.getSelectedItem().toString());
-        double exchangeRateTo = fullCurrency.getValue().rates.get(spTo.getSelectedItem().toString());
-
-        convertion.setText(Util.convertValue(amount,exchangeRateFrom,exchangeRateTo)+"");
+        if(fullCurrency.getValue()!=null){
+            double exchangeRateFrom = fullCurrency.getValue().rates.get(spFrom.getSelectedItem().toString());
+            double exchangeRateTo = fullCurrency.getValue().rates.get(spTo.getSelectedItem().toString());
+            convertion.setText(df.format(Util.convertValue(amount,exchangeRateFrom,exchangeRateTo))+" "+spTo.getSelectedItem().toString() +" \u5143 \u20AC \u20BD \u00A5");
+        }
     }
 
     @Override
@@ -130,10 +135,6 @@ public class ConverterFragment extends Fragment {
             @Override
             public void onChanged(@Nullable Map<String, String> def) {
                 initSpinners(getContext());
-//               // adapterFrom.clear();
-//                adapterFrom.addAll((String[]) Objects.requireNonNull(def.keySet().toArray()));
-//                //adapterTo.clear();
-//                adapterTo.addAll((String[]) Objects.requireNonNull(def.keySet().toArray()));
             }
         });
 

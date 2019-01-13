@@ -15,7 +15,7 @@ public class Database {
 
     private Database(Context context) {
         db = Room.databaseBuilder(context.getApplicationContext(),
-                FixerDatabase.class, "database-currency").build();
+                FixerDatabase.class, "database-currency").allowMainThreadQueries().build();
     }
 
 }

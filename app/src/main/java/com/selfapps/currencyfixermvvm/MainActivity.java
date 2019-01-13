@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                    // mTextMessage.setText(R.string.title_home);
-                    loadFragment(new ConverterFragment());
+                    loadFragment(ConverterFragment.newInstance());
                     return true;
                 case R.id.navigation_dashboard:
                   //  mTextMessage.setText(R.string.title_dashboard);

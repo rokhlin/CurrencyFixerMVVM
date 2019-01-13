@@ -19,7 +19,7 @@ public interface CurrencyDao {
 
 
     @Query(("SELECT * FROM currencies WHERE date = :findDate"))
-    LiveData<FullCurrency> findCurrency(String findDate);
+    FullCurrency findCurrency(String findDate);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertCurrency(FullCurrency currency);

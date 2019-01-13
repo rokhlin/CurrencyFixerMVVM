@@ -2,9 +2,12 @@ package com.selfapps.currencyfixermvvm;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.preference.PowerPreference;
@@ -14,6 +17,8 @@ import com.selfapps.currencyfixermvvm.data.entity.FullCurrency;
 import com.selfapps.currencyfixermvvm.data.repository.CurrencyDao;
 import com.selfapps.currencyfixermvvm.data.repository.Database;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -37,7 +42,9 @@ public class ConverterViewModel extends AndroidViewModel {
 
 
     public LiveData<FullCurrency> getLatest(){
-        FullCurrency latestCurrency = db.findCurrency(Util.getFormattedDate()).getValue();
+        Log.d("TAG", "GET_LATEST from LocalStorage: "+Util.getFormattedDate());
+        FullCurrency latestCurrency = db.findCurrency(Util.getFormattedDate());
+
         if(latestCurrency != null)
             fullCurrencyLiveData.postValue(latestCurrency);
         else
@@ -53,6 +60,7 @@ public class ConverterViewModel extends AndroidViewModel {
                          @Override
                          public void run() {
                              db.insertCurrency(latestCurr);
+                             Log.d("TAG", "LATEST Currency saved: ");
                          }
                      }).start();
 
